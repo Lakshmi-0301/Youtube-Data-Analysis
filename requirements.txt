@@ -1,0 +1,12 @@
+streamlit
+pandas
+numpy
+matplotlib
+seaborn
+nltk
+textblob
+prophet
+scikit-learn
+sqlite3
+requests
+google-api-python-client
