@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .option {
+            width: 200px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .option:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Select an Analysis</h1>
+
+    <div class="container">
+        <img src="/static/eda.png" class="option" onclick="selectAnalysis('EDA')">
+        <img src="/static/timeseries.png" class="option" onclick="selectAnalysis('Time Series')">
+        <img src="/static/sentiment.png" class="option" onclick="selectAnalysis('Sentiment Analysis')">
+    </div>
+
+    <script>
+        function selectAnalysis(analysis) {
+            window.location.href = "/?analysis=" + analysis;
+        }
+    </script>
+
+</body>
+</html>

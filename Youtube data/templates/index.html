@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Search</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(
+          45deg,
+          #ff9a9e,
+          #fad0c4,
+          #a1c4fd,
+          #c2e9fb,
+          #ffdde1,
+          #d4fc79,
+          #96e6a1,
+          #fbc2eb
+        );
+        background-size: 300% 300%;
+        animation: gradientBG 12s ease infinite;
+      }
+
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        25% {
+          background-position: 50% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        75% {
+          background-position: 50% 100%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .sticker {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .sticker img {
+        width: 250px;
+      }
+
+      .search-box {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 10px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 700px;
+      }
+
+      .search-box input {
+        flex: 1;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+        outline: none;
+        background: transparent;
+      }
+
+      .search-box button {
+        background: none;
+        color: grey;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      .search-box button:hover {
+        color: black;
+      }
+
+      .video-count {
+        margin-top: 12px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .video-count input {
+        padding: 6px;
+        width: 80px;
+        font-size: 16px;
+        text-align: center;
+        border: 2px solid grey;
+        background: transparent;
+        outline: none;
+        border-radius: 8px;
+        color: black;
+      }
+
+      .video-count input:focus {
+        border-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sticker">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
+        alt="YouTube Logo"
+      />
+    </div>
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchQuery"
+        placeholder="Enter keyword (e.g., dogs, cats)"
+        required
+      />
+      <button onclick="searchVideos()">🔍</button>
+    </div>
+
+    <div class="video-count">
+      <label for="videoCount">Number of Videos:</label>
+      <input type="number" id="videoCount" min="1" max="1000" value="50" />
+    </div>
+
+    <script>
+function searchVideos() {
+    const query = document.getElementById("searchQuery").value.trim();
+    const count = document.getElementById("videoCount").value;
+
+    if (query === "") {
+        alert("Please enter a search term.");
+        return;
+    }
+
+    console.log("Query:", query); // ✅ Debugging
+    console.log("Count:", count);
+
+    // ✅ Send data directly to Streamlit
+    fetch('/?_streamlit_report=1', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            search_query: query,
+            video_count: count
+        })
+    });
+
+    // ✅ Redirect to Streamlit Home
+    window.location.href = `/?search_query=${encodeURIComponent(query)}&video_count=${encodeURIComponent(count)}`;
+}
+
+
+
+      </script>
+      
+      <form id="searchForm" method="POST">
+        <input type="hidden" id="hiddenQuery" name="search_query">
+        <input type="hidden" id="hiddenCount" name="video_count">
+    </form>
+  </body>
+</html>

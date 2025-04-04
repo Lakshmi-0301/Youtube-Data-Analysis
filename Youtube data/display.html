@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Data Analysis</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      h2 {
+        color: #333;
+      }
+      pre {
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📊 YouTube Data Analysis</h1>
+
+    <h2>Summary Statistics</h2>
+    <pre id="summary"></pre>
+
+    <h2>Histogram Interpretation</h2>
+    <pre id="histogram"></pre>
+
+    <script>
+      // Fetch summary statistics
+      fetch("http://127.0.0.1:8000/stats")
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("summary").textContent = JSON.stringify(
+            data,
+            null,
+            2
+          );
+        })
+        .catch((error) =>
+          console.error("Error fetching summary stats:", error)
+        );
+
+      // Fetch histogram interpretation
+      fetch("http://127.0.0.1:8000/histogram")
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("histogram").textContent = JSON.stringify(
+            data,
+            null,
+            2
+          );
+        })
+        .catch((error) =>
+          console.error("Error fetching histogram data:", error)
+        );
+    </script>
+  </body>
+</html>
