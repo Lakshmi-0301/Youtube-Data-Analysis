@@ -10,7 +10,7 @@ import json
 import sys
 
 # Insert your API key here
-API_KEY = "AIzaSyBuoTpWvf46ExRSpbnHpS1JqFFqMiaoBgQ"
+API_KEY = "ENTER_API_KEY"
 
 # Initialize YouTube API client
 youtube = build("youtube", "v3", developerKey=API_KEY)
